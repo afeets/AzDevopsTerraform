@@ -3,6 +3,15 @@ provider "azurerm" {
     features {}
 }
 
+terraform {
+    backend "azurerm" {
+        resource_group_name         = "Terraform_blob_storage"
+        storage_account_name        = "saterraformawf"
+        container_name              = "tfstate"
+        key                         = "terraform.tfstate"
+    }
+}
+
 resource "azurerm_resource_group" "terraform_test" {
     name = "terraform-main-rg"
     location = "Southeast Asia"
