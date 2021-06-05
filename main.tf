@@ -17,6 +17,11 @@ resource "azurerm_resource_group" "terraform_test" {
     location = "Southeast Asia"
 }
 
+variable "image_build_id" {
+  type        = string
+  description = "Latest Image Build Version"
+}
+
 resource "azurerm_container_group" "terraform_test_container" {
     name                    = "weatherapi"
     location                = azurerm_resource_group.terraform_test.location
@@ -28,7 +33,7 @@ resource "azurerm_container_group" "terraform_test_container" {
 
     container {
         name                = "weatherapi"
-        image               = "andyfeetenby/weatherapi"
+        image               = "andyfeetenby/weatherapi:${var.image_build_id}"
         cpu                 = "1"
         memory              = "1"
     
